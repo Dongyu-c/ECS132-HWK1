@@ -1,0 +1,173 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm,amssymb}
+ 
+
+
+
+\newtheorem*{theorem}{Theorem}
+
+\newtheorem*{claim}{Claim}
+
+\title{Homework One}
+\author{
+    Dongyu Chen\\
+    \and
+    Joshua Winter\\
+    \and 
+    Rishabh Manu\\
+    \and
+    Alan Wu\\
+    }
+\date{Jan 2021}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+\\Mailing tubes will be cited based on their reference number from the textbook. For example, if we used disjoint OR, the corresponding mailing tube would be (2.2) in the textbook (pg. 9)
+\\
+    \item 
+        \begin{enumerate}
+            \item Find P(Jill wins) when D is set to 4. 
+            \\P(Jill wins)=
+            \\P(Jill wins in first turn)
+            \\+P(Jill wins in the second turn and Jack doesn't win in the first turn)
+            \\+P(Jill wins in the third turn and Jack doesn't win in the second turn)
+            \\+P(Jill wins in the fourth turn and Jack doesn't win in the third turn)\\
+            \\
+            We first rewrite the probabilities in a cleaner format, defining $J_i$ as what Jill rolled on turn $i$ and $C_i$ as what Jack rolled on turn $i$:
+            \\
+            \\P(Jill wins)= 
+            \\P($J_1 >= 4$)
+            \\+ P($J_1 + J_2 >= 4$ and $J_1 <= 3$ and $C_1 <= 3$)
+            \\+ P($J_1 + J_2 + J_3 >= 4$ and $J_1 + J_2 <= 3$ and $C_1 + C_2 <= 3$)
+            \\+ P( $J_1 + J_2 + J_3 + J_4 >= 4$ and $J_1 + J_2 + J_3 = 3$ and $C_1 + C_2 + C_3 <= 3$)\\
+            \\
+            We can then rewrite some of these equations to a more discrete form: 
+            \\P($J_1 + J_2 >= 4$ and $J_1 <= 3$ and $C_1 <= 3$) becomes:
+            \begin{quote}
+            P($(J_1 = 1$ and $J_2 >= 3)$ or $(J_1 = 2$ and $J_2 >= 2)$ or $(J_1 = 3$ and $J_2 >= 1) $ and $(C_1 = 1$ or $C_1 = 2$ or $C_1 = 3)$)
+            \end{quote}
+            P($J_1 + J_2 + J_3 >= 4$ and $J_1 + J_2 <= 3$ and $C_1 + C_2 <= 3$) becomes:
+            \begin{quote}
+            P($(J_1 = 1$ and $J_2 = 1$ and $J_3 >= 2)$ or $(J_1 = 1$ and $J_2 = 2$ and $J_3 >= 1)$ or $(J_1 = 2$ and $J_2 = 1$ and $J_3 >= 1)$ and ($C_1 = 1$ and ($C_2 = 1$ or $C_2 = 2$) or ($C_1 = 2$ and $C_2 = 1$)))
+            \end{quote}
+            P( $J_1 + J_2 + J_3 + J_4 >= 4$ and $J_1 + J_2 + J_3 = 3$ and $C_1 + C_2 + C_3 <= 3$) becomes:
+            \begin{quote}
+            P($(J_1 = 1$ and $J_2 = 1$ and $J_3 = 1$ and $J_4 >= 1)$ and ($C_1 = 1$ and $C_2 = 1$ and $C_3 = 1$)) 
+            \end{quote}
+            \\
+             Now that the discrete forms are written, we may boil these down even further to their actual probabilities:\\
+             \\
+             Note: "and" statements will become multiplication via mailing tube (2.6) since each event is independent. Similarly, "or" statements become addition via mailing tube (2.2) since each grouping is disjoint. 
+             \\
+            \\ P$(J_1 >= 4) = 3/6$
+            \\
+            \\ P($(J_1 = 1$ and $J_2 >= 3)$ or $(J_1 = 2$ and $J_2 >= 2)$ or $(J_1 = 3$ and $J_2 >= 1) $ and $(C_1 = 1$ or $C_1 = 2$ or $C_1 = 3)$) = $((1/6)*(4/6)+(1/6)*(5/6)+(1/6)*(6/6))*((1/6)+(1/6)+(1/6))$
+            \\$= 45/216 $
+            \\
+            \\  P($(J_1 = 1$ and $J_2 = 1$ and $J_3 >= 2)$ or $(J_1 = 1$ and $J_2 = 2$ and $J_3 >= 1)$ or $(J_1 = 2$ and $J_2 = 1$ and $J_3 >= 1)$ and ($C_1 = 1$ and ($C_2 = 1$ or $C_2 = 2$) or ($C_1 = 2$ and $C_2 = 1$))) =  $((1/6)*(1/6)*(5/6)+(1/6)*(1/6)*(6/6)+(1/6)*(1/6)*(6/6))*((1/6)*((1/6)+(1/6))+(1/6)*(1/6))$
+            \\ $= 34/7776$
+            \\
+            \\ P($(J_1 = 1$ and $J_2 = 1$ and $J_3 = 1$ and $J_4 >= 1)$ and ($C_1 = 1$ and $C_2 = 1$ and $C_3 = 1$))  = $ (1/6)*(1/6)*(1/6)*(6/6)*(1/6)*(1/6)*(1/6)$ 
+            \\ $= 6/279936$
+            \\ 
+            \\From here all that is left to do is to add each probability to get P(Jill Wins)
+            \\$(3/6)+(45/216)+(34/7776)+(6/279936) \approx 0.712727194787$
+            \\
+            \item P(Jill wins in 2 turns)= P(Jack does not win on first roll)*P(Jill wins on second roll) = P(Jack does not win on first roll)*P(Jill does win on her second roll | Jack does not win on his first roll)
+            \\= P($(J_1 = 1$ and $J_2 >= 3)$ or $(J_1 = 2$ and $J_2 >= 2)$ or $(J_1 = 3$ and $J_2 >= 1) $ and $(C_1 = 1$ or $C_1 = 2$ or $C_1 = 3)$) = $((1/6)*(4/6)+(1/6)*(5/6)+(1/6)*(6/6))*((1/6)+(1/6)+(1/6))$
+            \\= 45/216
+            \\= 0.20833
+            \\Jill winning in two turns is dependent on Jack not winning on his first turn. So we use mailing tube equations 2.6 and 2.7 because the events are not independent.
+            \\
+            
+            \item Since the difference should be 1, if the winner has a number of more than 4, then the loser will also have a number of more or equal to 4.
+            \\ Therefore, in this condition we have the winner = 4 and the loser = 3
+            \\Let the rolls of the 2 be in 2 sets; the order of the rolls can be viewed separately.
+            \\P( the difference between the winner's and loser's totals is equal to 1) = 
+            \\P(Jill wins and difference is 1)
+            \\+ P(Jack wins and difference is 1)
+            =P(Jill rolls \{ 1,1,1,1 \} and Jack rolls \{ 1,1,1 \} )
+            \\+P(Jill rolls\{1,1,2\} and Jack rolls  \{1,2 \})
+            \\+P(Jill rolls  \{1,3 \} and Jack rolls  \{3  \})
+            \\+P(Jill rolls   \{1,1,1 \} and Jack rolls \{1,1,2 \} )
+            \\+P(Jill rolls  \{1,2  \} and Jack rolls\ \{1,3  \})
+            \\+P(Jill rolls \{3 \} and Jack rolls\{4 \})
+            \\=  $(1/6)^7+(1/6)^5*2*3 +(1/6)^3*2 
+            \\+ 3*(1/6)^6+2*(1/6)^4*3+(1/6)^2$
+            \\ = 0.0425
+            \\In this case we have two cases that we consider success, P(A or B) so we use mailing tube equation 2.2 and by extensions 2.4 
+            \\
+            \item We need to find P(Jill has the prize of 6|Jill has won) 
+            \\=$((1/6)*(1/6)+(1/6)*(1/6)+(1/6)*(1/6))*((1/6)+(1/6)+(1/6)) + ((1/6)*(1/6)*(1/6)+(1/6)*(1/6)*(1/6)+(1/6)*(1/6)*(1/6))*((1/6)*((1/6)+(1/6))+(1/6)*(1/6)) + (1/6)*(1/6)*(1/6)*(1/6)*(1/6)*(1/6)*(1/6)$
+            \\ - 0.2114233253
+            \\We know Jill has won for sure so we have to find the cases where she won specifically with a value of 6. So we use mailing tube equation 2.8 to find the probabilities of Jill having 6 and winning and dividing that by probabilities she won. But since every occasion of her having a total of 6 means she won, we simply find the probabilities that she reached 6 in four turns. 
+            \\
+            \item See attachment.
+        \end{enumerate}
+    \item See attachment.
+    \item 
+        \begin{enumerate}
+            \item Find probabilities that 0, 1 or 2 passengers fail to board at stop 2. 
+            \\
+            \\Using the same notation as in the textbook (pg.20), also let $A_i$ be the number of people that leave at the $ith$ stop
+            \\
+            \\If there are 2 waiting passengers at stop 2, there is one scenario where a passenger will fail to board. That is if 2 passengers boarded on stop one, 2 passengers attempt to board on stop 2, and nobody alights at the second stop. 
+            \\
+            \\P(0 fail to board) = 1 - P($B_2$ = 2 and $A_2$ = 0 and $B_1$ = 2) 
+            \\ = 1 - ($0.1 * 0.1 * 0.8^2$ )
+            \\P(1 fail to board) = P($B_2$ = 2 and $A_2$ = 0 and $B_1$ = 2) 
+            \\ = $0.1 * 0.1 * 0.8^2$ 
+            \\P(2 fail to board) = 0 
+            \item
+            Let the number of people on the bus at the $ith$ stop (before new passengers board and/or alight) be $P_i$
+            \\Let the number of waiting passengers at the $ith$ stop (not including you) be $X_i$.
+            We are assuming that all waiting passengers are looking to board. 
+            \\There is a 1/($X_i$+1) chance you are turned away at the $ith$ stop if $P_i$ + $X_i$ $>= 3$. Otherwise, you will be able to board.
+            
+            \\There is a case if two people board on stop one and are currently on the bus, and two people are looking to board on stop 2. There is a probability you are turned away if either 1 person from stop 1 alight OR no people from stop 1 alight.
+            \\
+            \\In these scenarios, you could be turned away: 
+            $P_2 = 1$ and $X_2 = 2$; 
+            $P_2 = 2$ and $X_2 = 1$;
+            $P_2 = 2$ and $X_2 = 2$;
+            \\The probability for each is as follows. (using (2.2) and (2.6) for OR, AND respectively) 
+            \\P($P_2 = 1$ and $X_2 = 2$) = $0.4*0.8*1/(2+1)*0.1$
+            \\P($P_2 = 2$ and $X_2 = 1$) = $0.1*(0.8)^2*1/(1+1)*0.4$
+            \\P($P_2 = 2$ and $X_2 = 2$) = $0.1*0.8*0.2*1/(2+1)*0.1$ + $0.1*(0.8)^2*2/(2+1)*0.1$
+            \\P(turned away) = $0.4*0.8*1/(2+1)*0.1$ + $0.1*(0.8)^2*1/(1+1)*0.4$ + $0.1*0.8*0.2*1/(2+1)*0.1$ + $0.1*(0.8)^2*2/(2+1)*0.1$ \approx 0.02862
+            
+            
+    
+            
+            
+            
+        
+        \end{enumerate}
+    \item See attachment.
+    \item We set d = 3 and nreps = 2000,
+    $\vspace{5mm}$
+    \\ $>$ l = simjj(3,2000)
+    \\$>$winning $<-$ vector(length=2000 )
+     \\$>$ for (i in 1:2000) 
+     \\$\hspace*{1cm}$if(l[["winner"]][i]== "Jill")
+    \\$\hspace*{2cm}$winning[i] $<-$ l[["prize"]][i]
+    \\ $\hspace*{1cm}$else winning[i]$<-$ 0
+    \\$\vspace{5mm}$
+    \\Here we get the vector of Jill's winning
+ \\The expected value we get is 3.690226 and variance is 4.789437
+   \\This could  be done by typing:
+        \\$>$ mean(winning)
+        \\$[1] 3.690226$
+        \\$>$ var(winning)
+        \\$[1] 4.789437$
+
+\end{enumerate}
+
+
+
+
+\end{document}
